@@ -51,7 +51,7 @@ jobs:
           token: ${{ env.GITHUB_TOKEN }}
           commit-message: >-
             chore: update dependencies
-          title: "[Actions] Auto-Update dependencies"
+          title: "chore: auto-update dependencies"
           body: ${{ steps.get_outdated_dependencies.outputs.body }}
           branch: chore/update-dependencies
           delete-branch: true
