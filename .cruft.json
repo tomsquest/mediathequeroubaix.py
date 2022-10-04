@@ -1,0 +1,18 @@
+{
+  "template": "https://github.com/woltapp/wolt-python-package-cookiecutter",
+  "commit": "6669a067eeaaed3bee84312428a3e94cd13295f2",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "author_name": "Thomas Queste",
+      "author_email": "tom@tomsquest.com",
+      "github_username": "tomsquest",
+      "project_name": "mediathequeroubaix.py",
+      "project_slug": "mediathequeroubaix.py",
+      "package_name": "mediathequeroubaix",
+      "project_short_description": "Client for the library of Roubaix (Médiathèque Roubaix)",
+      "_template": "https://github.com/woltapp/wolt-python-package-cookiecutter"
+    }
+  },
+  "directory": null
+}
