@@ -61,7 +61,7 @@ include = '\.pyi?$'
 
 [tool.pytest.ini_options]
 addopts = """\
-    --cov mediathequeroubaix.py \
+    --cov mediathequeroubaix \
     --cov tests \
     --cov-report term-missing \
     --no-cov-on-fail \
