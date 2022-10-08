@@ -13,6 +13,9 @@ homepage = "https://tomsquest.github.io/mediathequeroubaix.py"
 repository = "https://github.com/tomsquest/mediathequeroubaix.py"
 
 classifiers = [
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Typing :: Typed",
 ]
