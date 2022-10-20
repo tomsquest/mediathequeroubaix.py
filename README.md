@@ -85,3 +85,7 @@ pre-commit run --all-files
 ---
 
 This project was generated using the [wolt-python-package-cookiecutter](https://github.com/woltapp/wolt-python-package-cookiecutter) template.
+
+## Credits
+
+- Background and color from [PrettySnap](https://prettysnap.app/)
