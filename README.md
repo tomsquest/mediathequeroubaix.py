@@ -1,13 +1,12 @@
 <p align="center" width="100%">
-  <img src="doc/banner.png" alt="logo"/>
+  <img src="doc/banner.png" alt="MediathequeRoubaix.py"/>
 </p>
 
-# **MediathequeRoubaix.py** is a Python CLI for the library of Roubaix (Médiathèque Roubaix)
+# Python CLI for the library of Roubaix (Médiathèque Roubaix)
 
 [![PyPI](https://img.shields.io/pypi/v/mediathequeroubaix?style=flat-square)](https://pypi.python.org/pypi/mediathequeroubaix/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mediathequeroubaix?style=flat-square)](https://pypi.python.org/pypi/mediathequeroubaix/)
 [![PyPI - License](https://img.shields.io/pypi/l/mediathequeroubaix?style=flat-square)](https://pypi.python.org/pypi/mediathequeroubaix/)
-[![Coookiecutter - Wolt](https://img.shields.io/badge/cookiecutter-Wolt-00c2e8?style=flat-square&logo=cookiecutter&logoColor=D4AA00&link=https://github.com/woltapp/wolt-python-package-cookiecutter)](https://github.com/woltapp/wolt-python-package-cookiecutter)
 
 ---
 
@@ -17,7 +16,18 @@
 
 ---
 
-Client for the library of Roubaix (Médiathèque Roubaix)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Installation](#installation)
+- [Development](#development)
+  - [Testing](#testing)
+  - [Pre-commit](#pre-commit)
+  - [Releasing](#releasing)
+- [Credits](#credits)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
 
@@ -49,6 +59,18 @@ poetry shell
 pytest
 ```
 
+### Pre-commit
+
+```sh
+pre-commit install
+```
+
+Or if you want to run all checks for all files:
+
+```sh
+pre-commit run --all-files
+```
+
 ### Releasing
 
 Trigger the [Draft release workflow](https://github.com/tomsquest/mediathequeroubaix.py/actions/workflows/draft_release.yml)
@@ -59,33 +81,8 @@ Find the draft release from the
  a release is published, it'll trigger [release](https://github.com/tomsquest/mediathequeroubaix.py/blob/master/.github/workflows/release.yml) workflow which creates PyPI
  release.
 
-### Pre-commit
-
-Pre-commit hooks run all the auto-formatters (e.g. `black`, `isort`), linters (e.g. `mypy`, `flake8`), and other quality
- checks to make sure the changeset is in good shape before a commit/push happens.
-
-You can install the hooks with (runs for each commit):
-
-```sh
-pre-commit install
-```
-
-Or if you want them to run only for each push:
-
-```sh
-pre-commit install -t pre-push
-```
-
-Or if you want e.g. want to run all checks manually for all files:
-
-```sh
-pre-commit run --all-files
-```
-
----
-
-This project was generated using the [wolt-python-package-cookiecutter](https://github.com/woltapp/wolt-python-package-cookiecutter) template.
 
 ## Credits
 
 - Background and color from [PrettySnap](https://prettysnap.app/)
+- Python project bootstrapped using [Wolt template](https://github.com/woltapp/wolt-python-package-cookiecutter)
