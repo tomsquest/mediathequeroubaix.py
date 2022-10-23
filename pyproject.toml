@@ -26,6 +26,9 @@ packages = [
 
 [tool.poetry.dependencies]
 python = ">=3.7.1, <4.0"
+requests = "^2.28.1"
+python-dotenv = "^0.21.0"
+pydantic = "^1.10.2"
 
 [tool.poetry.dev-dependencies]
 autoflake = "*"
@@ -38,7 +41,8 @@ flake8-debugger = "*"
 flake8-eradicate = "*"
 flake8-logging-format = "*"
 isort = "*"
-mypy = "*"
+# Force version of mypy to the one of Results to avoid weird errors
+mypy = "^0.950"
 pep8-naming = "*"
 pre-commit = "*"
 pytest = "*"
@@ -47,6 +51,11 @@ pytest-cov = "*"
 python-kacl = "*"
 pyupgrade = "*"
 tryceratops = "*"
+
+[tool.poetry.group.dev.dependencies]
+types-requests = "^2.28.11.2"
+returns = "^0.19.0"
+requests-mock = "^1.10.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -62,7 +71,6 @@ include = '\.pyi?$'
 [tool.pytest.ini_options]
 addopts = """\
     --cov mediathequeroubaix \
-    --cov tests \
     --cov-report term-missing \
     --no-cov-on-fail \
 """
@@ -75,11 +83,9 @@ exclude_lines = [
 
 [tool.mypy]
 disallow_any_unimported = true
-disallow_untyped_defs = true
-no_implicit_optional = true
-strict_equality = true
-warn_unused_ignores = true
-warn_redundant_casts = true
-warn_return_any = true
-check_untyped_defs = true
+pretty = true
 show_error_codes = true
+show_error_context = true
+show_column_numbers = true
+strict = true
+plugins = ['returns.contrib.mypy.returns_plugin', 'pydantic.mypy']
