@@ -30,7 +30,7 @@ requests = "^2.28.1"
 python-dotenv = "^0.21.0"
 pydantic = "^1.10.2"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 autoflake = "*"
 black = "*"
 flake8 = "*"
@@ -46,16 +46,14 @@ mypy = "^0.950"
 pep8-naming = "*"
 pre-commit = "*"
 pytest = "*"
-pytest-github-actions-annotate-failures = "*"
 pytest-cov = "*"
+pytest-github-actions-annotate-failures = "*"
 python-kacl = "*"
 pyupgrade = "*"
-tryceratops = "*"
-
-[tool.poetry.group.dev.dependencies]
-types-requests = "^2.28.11.2"
-returns = "^0.19.0"
 requests-mock = "^1.10.0"
+returns = "^0.19.0"
+tryceratops = "*"
+types-requests = "^2.28.11.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
