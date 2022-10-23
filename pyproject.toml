@@ -63,9 +63,6 @@ build-backend = "poetry.core.masonry.api"
 profile = "black"
 src_paths = ["src", "tests"]
 
-[tool.black]
-include = '\.pyi?$'
-
 [tool.pytest.ini_options]
 addopts = """\
     --cov mediathequeroubaix \
