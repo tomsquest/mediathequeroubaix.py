@@ -37,6 +37,7 @@ flake8-comprehensions = "*"
 flake8-debugger = "*"
 flake8-eradicate = "*"
 flake8-logging-format = "*"
+flake8-pytest-style = "*"
 isort = "*"
 # Force version of mypy to the one of Results to avoid weird errors
 mypy = "^0.950"
