@@ -40,7 +40,7 @@ pip install mediathequeroubaix
 * Clone this repository
 * Requirements:
   * [Poetry](https://python-poetry.org/)
-  * Python 3.7+
+  * Python 3.10
 * Create a virtual environment and install the dependencies
 
 ```sh
