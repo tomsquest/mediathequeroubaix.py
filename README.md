@@ -20,6 +20,10 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
+- [Features](#features)
+  - [Loans](#loans)
+  - [Usage](#usage)
+- [Why I am doing this](#why-i-am-doing-this)
 - [Changelog](#changelog)
 - [Installation](#installation)
 - [Development](#development)
@@ -29,6 +33,43 @@
 - [Credits](#credits)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Features
+
+MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequederoubaix.fr](http://www.mediathequederoubaix.fr/).  
+
+<p align="center" width="100%">
+  <img src="doc/mr_homepage.png" alt="Screenshot mediathequederoubaix.fr"/>
+</p>
+
+### Loans
+
+1. Display a **list of your loans**
+2. ...for **many card holders** at once (family) (TODO)
+3. Quickly get the **next return date** for all you cards (TODO)
+
+### Usage
+
+Very basically for now, to list the loans of a single user defined in environment variable
+
+```shell
+$ export USERNAME="X001002003"
+$ export PASSWORD="password00"
+
+$ python src/mediathequeroubaix/main.py
+Getting loans of user: X001002003
+
+Number of loans: 2
+- [ 1/02] Machine learning avec Scikit-learn, due on: 2022-12-04, NOT renewable
+- [ 2/02] Programmation Python avancée, due on: 2022-12-04, renewable
+```
+
+## Why I am doing this
+
+I created this project to:
+1. Learn Functional Programing
+2. Learn typed and modern Python
+3. Be able to quickly list and renew my loans
 
 ## Changelog
 
