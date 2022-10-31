@@ -2,8 +2,10 @@ import re
 
 from returns.result import Failure, ResultE, Success
 
+from mediathequeroubaix.login.user import User
 
-def get_user(html: str) -> ResultE[str]:
+
+def get_user(html: str) -> ResultE[User]:
     match = re.search(
         r'<a class="connect" href="/espace_personnel">\s*'
         r'<em class="icon icon-profile-white"></em>\s*'
@@ -13,5 +15,6 @@ def get_user(html: str) -> ResultE[str]:
         html,
     )
     if match:
-        return Success(match.group(1))
+        s = match.group(1)
+        return Success(User(s))
     return Failure(ValueError("User not found"))

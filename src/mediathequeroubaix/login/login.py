@@ -5,9 +5,10 @@ from returns.pointfree import bind_result
 from returns.result import safe
 
 from mediathequeroubaix.login.get_user import get_user
+from mediathequeroubaix.login.user import User
 
 
-def login(session: Session, username: str, password: str) -> IOResultE[str]:
+def login(session: Session, username: str, password: str) -> IOResultE[User]:
     return flow(
         (session, username, password),
         connect,
