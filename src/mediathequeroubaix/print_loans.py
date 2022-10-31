@@ -1,5 +1,4 @@
 from requests import Session
-from returns.io import IO, IOResultE
 from returns.pipeline import is_successful
 from returns.unsafe import unsafe_perform_io
 
@@ -8,9 +7,9 @@ from mediathequeroubaix.fetch_loans.loan import Loan
 
 
 def print_loans(*, session: Session) -> None:
-    result: IOResultE[list[Loan]] = fetch_loans(session)
+    result = fetch_loans(session)
     if is_successful(result):
-        success: IO[list[Loan]] = result.unwrap()
+        success = result.unwrap()
         loans = unsafe_perform_io(success)
         _print(loans)
     else:
