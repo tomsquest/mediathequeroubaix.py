@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 - Print connected user when getting loans
+- Display due dates as date, not datetime
 
 ## [0.2.0] - 2022-10-25
 ### Added
