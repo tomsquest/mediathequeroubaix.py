@@ -1,22 +1,23 @@
-from requests import Session
+from requests import Response, Session
 from returns.io import IOResultE, impure_safe
 from returns.pipeline import flow
-from returns.pointfree import bind_ioresult, bind_result
+from returns.pointfree import bind_result
+from returns.result import safe
 
 from mediathequeroubaix.login.get_user import get_user
 
 
-def do_login(session: Session, username: str, password: str) -> IOResultE[str]:
+def login(session: Session, username: str, password: str) -> IOResultE[str]:
     return flow(
         (session, username, password),
-        log_in,
-        bind_ioresult(get_espace_personnel),
+        connect,
+        bind_result(get_html),
         bind_result(get_user),
     )
 
 
 @impure_safe
-def log_in(data: tuple[Session, str, str]) -> Session:
+def connect(data: tuple[Session, str, str]) -> Response:
     session, username, password = data
     response = session.post(
         "http://www.mediathequederoubaix.fr/user",
@@ -27,11 +28,9 @@ def log_in(data: tuple[Session, str, str]) -> Session:
         },
     )
     response.raise_for_status()
-    return session
+    return response
 
 
-@impure_safe
-def get_espace_personnel(session: Session) -> str:
-    response = session.get("http://www.mediathequederoubaix.fr/espace_personnel")
-    response.raise_for_status()
+@safe
+def get_html(response: Response) -> str:
     return response.text
