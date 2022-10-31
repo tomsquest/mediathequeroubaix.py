@@ -61,13 +61,6 @@ build-backend = "poetry.core.masonry.api"
 profile = "black"
 src_paths = ["src", "tests"]
 
-[tool.pytest.ini_options]
-addopts = """\
-    --cov mediathequeroubaix \
-    --cov-report term-missing \
-    --no-cov-on-fail \
-"""
-
 [tool.coverage.report]
 exclude_lines = [
     'if TYPE_CHECKING:',
