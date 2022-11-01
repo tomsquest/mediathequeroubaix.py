@@ -1,7 +1,7 @@
 from pydantic.tools import parse_raw_as
 from returns.result import safe
 
-from mediathequeroubaix.fetch_loans.loan import Loan
+from mediathequeroubaix.get_loans.loan import Loan
 
 
 @safe

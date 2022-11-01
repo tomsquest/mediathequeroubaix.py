@@ -1,6 +1,6 @@
 from returns.result import Success
 
-from mediathequeroubaix.fetch_loans.extract_token import extract_token
+from mediathequeroubaix.get_loans.extract_token import extract_token
 
 
 def test_ok() -> None:

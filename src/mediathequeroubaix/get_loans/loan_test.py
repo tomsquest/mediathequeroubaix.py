@@ -1,6 +1,6 @@
 import datetime
 
-from mediathequeroubaix.fetch_loans.loan import Loan
+from mediathequeroubaix.get_loans.loan import Loan
 
 
 def test_convert_due_date_to_date() -> None:

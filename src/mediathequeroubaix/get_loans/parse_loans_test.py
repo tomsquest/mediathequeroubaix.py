@@ -1,7 +1,7 @@
 from returns.pipeline import is_successful
 
-from mediathequeroubaix.fetch_loans.loan import Loan
-from mediathequeroubaix.fetch_loans.parse_loans import parse_loans
+from mediathequeroubaix.get_loans.loan import Loan
+from mediathequeroubaix.get_loans.parse_loans import parse_loans
 
 
 def test_empty() -> None:
