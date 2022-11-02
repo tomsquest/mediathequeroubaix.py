@@ -68,10 +68,13 @@ exclude_lines = [
 ]
 
 [tool.mypy]
+plugins = ['returns.contrib.mypy.returns_plugin', 'pydantic.mypy']
 disallow_any_unimported = true
+enable_error_code = ['truthy-bool', 'redundant-expr', 'unused-awaitable']
+local_partial_types = true
 pretty = true
+show_column_numbers = true
 show_error_codes = true
 show_error_context = true
-show_column_numbers = true
 strict = true
-plugins = ['returns.contrib.mypy.returns_plugin', 'pydantic.mypy']
+warn_unreachable = true
