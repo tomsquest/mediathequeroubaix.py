@@ -18,6 +18,7 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 ## Table of Contents
 
 - [Features](#features)
@@ -36,7 +37,7 @@
 
 ## Features
 
-MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequederoubaix.fr](http://www.mediathequederoubaix.fr/).  
+MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequederoubaix.fr](http://www.mediathequederoubaix.fr/).
 
 <p align="center" width="100%">
   <img src="doc/mr_homepage.png" alt="Screenshot mediathequederoubaix.fr"/>
@@ -67,6 +68,7 @@ Number of loans: 2
 ## Why I am doing this
 
 I created this project to:
+
 1. Learn Functional Programing
 2. Learn typed and modern Python
 3. Be able to quickly list and renew my loans
@@ -83,17 +85,17 @@ pip install mediathequeroubaix
 
 ## Development
 
-* Clone this repository
-* Requirements:
-  * [Poetry](https://python-poetry.org/)
-  * Python 3.10
-* Create a virtual environment and install the dependencies
+- Clone this repository
+- Requirements:
+  - [Poetry](https://python-poetry.org/)
+  - Python 3.10
+- Create a virtual environment and install the dependencies
 
 ```sh
 poetry install
 ```
 
-* Activate the virtual environment
+- Activate the virtual environment
 
 ```sh
 poetry shell
@@ -124,9 +126,8 @@ Trigger the [Draft release workflow](https://github.com/tomsquest/mediathequerou
 
 Find the draft release from the
 [GitHub releases](https://github.com/tomsquest/mediathequeroubaix.py/releases) and publish it. When
- a release is published, it'll trigger [release](https://github.com/tomsquest/mediathequeroubaix.py/blob/master/.github/workflows/release.yml) workflow which creates PyPI
- release.
-
+a release is published, it'll trigger [release](https://github.com/tomsquest/mediathequeroubaix.py/blob/master/.github/workflows/release.yml) workflow which creates PyPI
+release.
 
 ## Credits
 

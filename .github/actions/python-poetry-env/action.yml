@@ -1,14 +1,14 @@
-name: 'Setup Python + Poetry environment'
-description: 'Setup Python + Poetry environment'
+name: "Setup Python + Poetry environment"
+description: "Setup Python + Poetry environment"
 
 inputs:
   python-version:
     required: false
-    description: 'Python version'
-    default: '3.10'
+    description: "Python version"
+    default: "3.10"
 outputs: {}
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - uses: actions/setup-python@v2
       with:
