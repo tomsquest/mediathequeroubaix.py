@@ -69,8 +69,8 @@ repos:
         name: poetry-check
         entry: poetry check
         language: system
+        files: 'pyproject.toml'
         pass_filenames: false
-        always_run: true
       - id: kacl-verify
         name: kacl-verify
         entry: poetry run kacl-cli verify
