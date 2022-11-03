@@ -23,6 +23,12 @@ repos:
     hooks:
       - id: doctoc
         args: [ "--update-only", "--github", "--title", "## Table of Contents" ]
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.9.0
+    hooks:
+      - id: python-check-mock-methods
+      - id: python-use-type-annotations
+      - id: python-check-blanket-noqa
   - repo: local
     hooks:
       - id: autoflake
