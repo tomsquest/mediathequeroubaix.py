@@ -24,7 +24,7 @@ jobs:
         id: changes
         run: |
           changed="$(git status --porcelain | wc -l)"
-          echo "changed=$changed" >> $GITHUB_OUTPUT
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
       - name: apply additional changes and fixes
         if: steps.changes.outputs.changed > 0
