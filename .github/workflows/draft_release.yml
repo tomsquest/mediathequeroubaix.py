@@ -19,7 +19,7 @@ jobs:
         shell: bash
         run: |
           poetry version ${{ github.event.inputs.version }}
-          version=$(poetry version --short)
+          version="$(poetry version --short)"
           echo "version=$version" >> $GITHUB_OUTPUT
       - name: Update changelog
         id: changelog

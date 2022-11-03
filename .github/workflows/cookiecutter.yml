@@ -23,7 +23,7 @@ jobs:
       - name: Check if there are changes
         id: changes
         run: |
-          changed=$(git status --porcelain | wc -l)
+          changed="$(git status --porcelain | wc -l)"
           echo "changed=$changed" >> $GITHUB_OUTPUT
 
       - name: apply additional changes and fixes
