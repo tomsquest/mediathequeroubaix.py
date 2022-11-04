@@ -7,11 +7,9 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
-
 documentation = "https://github.com/tomsquest/mediathequeroubaix.py"
 homepage = "https://tomsquest.github.io/mediathequeroubaix.py"
 repository = "https://github.com/tomsquest/mediathequeroubaix.py"
-
 classifiers = [
     "Programming Language :: Python :: 3.10",
     "Typing :: Typed",
@@ -19,7 +17,6 @@ classifiers = [
     "Environment :: Console",
     "Intended Audience :: End Users/Desktop",
 ]
-
 packages = [
     { include = "mediathequeroubaix", from = "src" }
 ]
@@ -40,6 +37,7 @@ flake8-comprehensions = "*"
 flake8-debugger = "*"
 flake8-eradicate = "*"
 flake8-logging-format = "*"
+flake8-pyprojecttoml = "*"
 flake8-pytest-style = "*"
 isort = "*"
 # Force version of mypy to the one of Results to avoid weird errors
@@ -81,3 +79,39 @@ show_error_codes = true
 show_error_context = true
 strict = true
 warn_unreachable = true
+
+[tool.flake8]
+ignore = [
+    # Line break occurred before a binary operator (W503)
+    # https://github.com/psf/black/issues/52
+    "W503",
+    # Line too long (E501)
+    # 1. black does not format comments
+    #    https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#comments
+    # 2. long links in doc strings are an issue
+    "E501",
+    # flake8-builtins
+    # the likelihood of running into an issue when shadowing a builtin
+    # with a class attribute is very low
+    "A003",
+    # flake8-bugbear
+    # fastapi recommends to use `Depend()` as an argument default.
+    # Unfortuantely, exceptions are hardcoded in bugbear.
+    # https://github.com/PyCQA/flake8-bugbear/issues/62
+    "B008",
+]
+# pep8-naming
+classmethod-decorators = [
+    "classmethod",      # built-in
+    "validator",        # pydantic
+    "root_validator",   # pydantic
+]
+enable-extensions= [
+    "G",  # flake8-logging-format
+]
+per-file-ignores = [
+    "*/__init__.py: F401"  # star imports in `__init__.py` files are ok
+]
+# Enables maccabe complexity checks
+max-complexity = 10
+exclude = [".git","__pycache__","old","build","dist",".venv",".eggs",".tox"]

@@ -10,7 +10,7 @@ python-versions = ">=3.5"
 dev = ["cloudpickle", "coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy (>=0.900,!=0.940)", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "sphinx", "sphinx-notfound-page", "zope.interface"]
 docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
-tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
+tests_no_zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
 [[package]]
 name = "autoflake"
@@ -70,7 +70,7 @@ optional = false
 python-versions = ">=3.6.0"
 
 [package.extras]
-unicode-backport = ["unicodedata2"]
+unicode_backport = ["unicodedata2"]
 
 [[package]]
 name = "click"
@@ -243,6 +243,21 @@ optional = false
 python-versions = ">=3.6,<4.0"
 
 [[package]]
+name = "flake8-pyprojecttoml"
+version = "0.0.2"
+description = "Inject pyproject.toml support into flake8."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+flake8 = "*"
+tomli = {version = "*", markers = "python_version < \"3.11\""}
+
+[package.extras]
+dev = ["darglint", "flake8", "flake8-annotations", "flake8-bugbear", "flake8-commas", "flake8-comprehensions", "flake8-docstrings", "flake8-fixme", "flake8-isort", "flake8-mutable", "flake8-print", "flake8-pytest-style", "flake8-quotes", "flake8-return", "flake8-simplify", "flake8-type-checking", "flake8-use-fstring", "mypy", "pep8-naming", "pylint", "pytest", "pytest-cov", "toml", "yapf"]
+
+[[package]]
 name = "flake8-pytest-style"
 version = "1.6.0"
 description = "A flake8 plugin checking common style issues or inconsistencies with pytest-based tests."
@@ -312,9 +327,9 @@ python-versions = ">=3.6.1,<4.0"
 
 [package.extras]
 colors = ["colorama (>=0.4.3,<0.5.0)"]
-pipfile-deprecated-finder = ["pipreqs", "requirementslib"]
+pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
 plugins = ["setuptools"]
-requirements-deprecated-finder = ["pip-api", "pipreqs"]
+requirements_deprecated_finder = ["pip-api", "pipreqs"]
 
 [[package]]
 name = "mccabe"
@@ -561,7 +576,7 @@ python-versions = ">=3.6"
 all = ["msgpack", "ruamel.yaml (>=0.17)", "toml"]
 msgpack = ["msgpack"]
 pyyaml = ["PyYAML"]
-ruamel-yaml = ["ruamel.yaml (>=0.17)"]
+"ruamel.yaml" = ["ruamel.yaml (>=0.17)"]
 toml = ["toml"]
 yaml = ["ruamel.yaml (>=0.17)"]
 
@@ -627,7 +642,7 @@ urllib3 = ">=1.21.1,<1.27"
 
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
-use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
+use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "requests-mock"
@@ -805,7 +820,7 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10.*"
-content-hash = "14122e2738e78665d35487f1b3db02168cf6190d41aaf2071271838ff5b6623e"
+content-hash = "2c85bde1d1453b16f399425ce86e531a5981348139cf46c9bbc00b811f333a80"
 
 [metadata.files]
 attrs = [
@@ -957,6 +972,10 @@ flake8-logging-format = [
 flake8-plugin-utils = [
     {file = "flake8-plugin-utils-1.3.2.tar.gz", hash = "sha256:20fa2a8ca2decac50116edb42e6af0a1253ef639ad79941249b840531889c65a"},
     {file = "flake8_plugin_utils-1.3.2-py3-none-any.whl", hash = "sha256:1fe43e3e9acf3a7c0f6b88f5338cad37044d2f156c43cb6b080b5f9da8a76f06"},
+]
+flake8-pyprojecttoml = [
+    {file = "flake8-pyprojecttoml-0.0.2.tar.gz", hash = "sha256:b78dd64254e2d6aa596b5be4e2a41b81147cafec57760de1c7322d025159983c"},
+    {file = "flake8_pyprojecttoml-0.0.2-py3-none-any.whl", hash = "sha256:37b9a8e5274d04591fbecc0782f626fb31b8d266e26192ce18ada25dabfc9f1d"},
 ]
 flake8-pytest-style = [
     {file = "flake8-pytest-style-1.6.0.tar.gz", hash = "sha256:c1175713e9e11b78cd1a035ed0bca0d1e41d09c4af329a952750b61d4194ddac"},
