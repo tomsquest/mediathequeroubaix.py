@@ -2,7 +2,7 @@ import re
 
 from returns.result import Failure, ResultE, Success
 
-from mediathequeroubaix.login.user import User
+from mediathequeroubaix.login.authenticated_session import User
 
 
 def get_user(html: str) -> ResultE[User]:

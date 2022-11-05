@@ -4,16 +4,19 @@ from returns.pipeline import flow
 from returns.pointfree import bind_result
 from returns.result import safe
 
+from mediathequeroubaix.login.authenticated_session import AuthenticatedSession
 from mediathequeroubaix.login.get_user import get_user
-from mediathequeroubaix.login.user import User
 
 
-def login(session: Session, username: str, password: str) -> IOResultE[User]:
+def login(
+    session: Session, username: str, password: str
+) -> IOResultE[AuthenticatedSession]:
     return flow(
         (session, username, password),
         connect,
         bind_result(get_html),
         bind_result(get_user),
+        bind_result(safe(lambda user: AuthenticatedSession(session, user))),
     )
 
 

@@ -9,8 +9,8 @@ def authenticate(*, session: Session, username: str, password: str) -> None:
     result = login(session, username, password)
     if is_successful(result):
         success = result.unwrap()
-        user = unsafe_perform_io(success)
-        print(f"User: {user}")
+        authenticated_session = unsafe_perform_io(success)
+        print(f"User: {authenticated_session.user}")
     else:
         failure = result.failure()
         print("❌ FAILURE!", failure)

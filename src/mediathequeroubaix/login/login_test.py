@@ -29,7 +29,7 @@ def test_ok(requests_mock: mock) -> None:
 
     assert is_successful(result)
     actual = unsafe_perform_io(result.unwrap())
-    assert actual == "John DOE"
+    assert actual.user == "John DOE"
 
 
 def test_login_failure(requests_mock: mock) -> None:
