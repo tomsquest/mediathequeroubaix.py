@@ -1,16 +1,13 @@
 from requests import Session
-from returns.pipeline import is_successful
-from returns.unsafe import unsafe_perform_io
+from returns.io import IOFailure, IOSuccess
+from returns.result import Success
 
 from mediathequeroubaix.login.login import login
 
 
 def authenticate(*, session: Session, username: str, password: str) -> None:
-    result = login(session, username, password)
-    if is_successful(result):
-        success = result.unwrap()
-        authenticated_session = unsafe_perform_io(success)
-        print(f"User: {authenticated_session.user}")
-    else:
-        failure = result.failure()
-        print("❌ FAILURE!", failure)
+    match login(session, username, password):
+        case IOSuccess(Success(authenticated_session)):
+            print(f"User: {authenticated_session.user}")
+        case IOFailure(failure):
+            print("❌ FAILURE!", failure)

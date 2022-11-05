@@ -1,20 +1,17 @@
 from requests import Session
-from returns.pipeline import is_successful
-from returns.unsafe import unsafe_perform_io
+from returns.io import IOFailure, IOSuccess
+from returns.result import Success
 
 from mediathequeroubaix.get_loans.get_loans import get_loans
 from mediathequeroubaix.get_loans.loan import Loan
 
 
 def print_loans(*, session: Session) -> None:
-    result = get_loans(session)
-    if is_successful(result):
-        success = result.unwrap()
-        loans = unsafe_perform_io(success)
-        _print(loans)
-    else:
-        failure = result.failure()
-        print("❌ FAILURE!", failure)
+    match get_loans(session):
+        case IOSuccess(Success(loans)):
+            _print(loans)
+        case IOFailure(failure):
+            print("❌ FAILURE!", failure)
 
 
 def _print(loans: list[Loan]) -> None:
