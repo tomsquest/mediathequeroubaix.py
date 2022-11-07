@@ -21,8 +21,8 @@
 ## Table of Contents
 
 - [Features](#features)
-  - [Loans](#loans)
-  - [Usage](#usage)
+  - [Get the loans](#get-the-loans)
+- [Usage](#usage)
 - [Why I am doing this](#why-i-am-doing-this)
 - [Changelog](#changelog)
 - [Installation](#installation)
@@ -42,15 +42,13 @@ MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequed
   <img src="doc/mr_homepage.png" alt="Screenshot mediathequederoubaix.fr"/>
 </p>
 
-### Loans
+### Get the loans
 
-1. Display a **list of your loans**
+1. Display a **list of your loans** and their due date
 2. ...for **many card holders** at once (family) (TODO)
-3. Quickly get the **next return date** for all you cards (TODO)
+3. and check the **next return date** for all you cards (TODO)
 
-### Usage
-
-Very basically for now, to list the loans of a single user defined in environment variable
+## Usage
 
 ```shell
 $ export USERNAME="X001002003"
@@ -58,18 +56,30 @@ $ export PASSWORD="password00"
 
 $ python src/mediathequeroubaix/main.py
 Getting loans of user: X001002003
-
-Number of loans: 2
-- [ 1/02] Machine learning avec Scikit-learn, due on: 2022-12-04, NOT renewable
-- [ 2/02] Programmation Python avancée, due on: 2022-12-04, renewable
+User: Thomas QUESTE
+                                           10 LOANS  
+┏━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━┓
+┃   #   │ Title                                                      │  Due date  │ Renewable ┃
+┠───────┼────────────────────────────────────────────────────────────┼────────────┼───────────┨
+┃  1/10 │ Opération trolls !                                         │ 12/11/2022 │ ✅        ┃
+┃  2/10 │ Le secret du Bagueer                                       │ 12/11/2022 │ ✅        ┃
+┃  3/10 │ Le grand pouvoir                                           │ 12/11/2022 │ ✅        ┃
+┃  4/10 │ Poursuivie !                                               │ 12/11/2022 │ ✅        ┃
+┃  5/10 │ À la recherche d'Ulysse                                    │ 12/11/2022 │ ✅        ┃
+┃  6/10 │ Monstrueux dinosaure                                       │ 12/11/2022 │ ✅        ┃
+┃  7/10 │ La grande aventure                                         │ 12/11/2022 │ ✅        ┃
+┃  8/10 │ Le bonheur est un céphalopode visqueux                     │ 12/11/2022 │ ✅        ┃
+┃  9/10 │ La folle vie de Bouboule Gum                               │ 12/11/2022 │ ✅        ┃
+┃ 10/10 │ Au revoir là-haut                                          │ 19/11/2022 │ ❌        ┃
+┗━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━┛
 ```
 
 ## Why I am doing this
 
 I created this project to:
-1. Learn Functional Programing
-2. Learn typed and modern Python
-3. Be able to quickly list and renew my loans
+1. Learn **Functional Programing**
+2. Learn **typed** and **modern** Python
+3. Be able to quickly list and renew my loans (especially when you have many cards)
 
 ## Changelog
 
@@ -132,3 +142,5 @@ Find the draft release from the
 
 - Background and color from [PrettySnap](https://prettysnap.app/)
 - Python project bootstrapped using [Wolt template](https://github.com/woltapp/wolt-python-package-cookiecutter)
+- Functional library is [Returns from DRY-Python](https://github.com/dry-python/returns)
+- Tables look great thanks to [Textualize's Rich](https://github.com/Textualize/rich)
