@@ -2,10 +2,12 @@ import base64
 
 import requests
 from requests_mock import mock
+from returns.io import IOFailure, IOSuccess
 from returns.pipeline import is_successful
 from returns.unsafe import unsafe_perform_io
 
 from mediathequeroubaix.get_loans.get_loans import get_loans
+from mediathequeroubaix.login.authenticated_session import AuthenticatedSession, User
 
 
 def test_ok(requests_mock: mock) -> None:
@@ -20,7 +22,9 @@ def test_ok(requests_mock: mock) -> None:
     """,
     )
 
-    result = get_loans(session=requests.Session())
+    result = get_loans(
+        IOSuccess(AuthenticatedSession(requests.Session(), User("John doe")))
+    )
 
     assert is_successful(result)
     actual = unsafe_perform_io(result.unwrap())
@@ -33,6 +37,14 @@ def test_no_token(requests_mock: mock) -> None:
         "http://www.mediathequederoubaix.fr/espace_personnel", text="some html"
     )
 
-    result = get_loans(session=requests.Session())
+    result = get_loans(
+        IOSuccess(AuthenticatedSession(requests.Session(), User("John doe")))
+    )
+
+    assert is_successful(result) is False
+
+
+def test_failed_session() -> None:
+    result = get_loans(IOFailure(ValueError()))
 
     assert is_successful(result) is False

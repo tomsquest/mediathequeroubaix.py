@@ -1,4 +1,3 @@
-import requests
 from dotenv import dotenv_values
 
 from mediathequeroubaix.authenticate import authenticate
@@ -11,8 +10,7 @@ if __name__ == "__main__":
     password = config.get("PASSWORD")
     if username and password:
         print(f"Getting loans of user: {username}")
-        session = requests.Session()
-        authenticate(session=session, username=username, password=password)
-        print_loans(session=session)
+        authenticated_session = authenticate(username, password)
+        print_loans(authenticated_session)
     else:
         print("Missing USERNAME and PASSWORD in env")

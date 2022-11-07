@@ -1,14 +1,14 @@
-from requests import Session
-from returns.io import IOFailure, IOSuccess
+from returns.io import IOFailure, IOResultE, IOSuccess
 from returns.result import Success
 from rich import box, print
 from rich.table import Table
 
 from mediathequeroubaix.get_loans.get_loans import get_loans
 from mediathequeroubaix.get_loans.loan import Loan
+from mediathequeroubaix.login.authenticated_session import AuthenticatedSession
 
 
-def print_loans(*, session: Session) -> None:
+def print_loans(session: IOResultE[AuthenticatedSession]) -> None:
     match get_loans(session):
         case IOSuccess(Success(loans)):
             _print(loans)
