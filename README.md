@@ -54,7 +54,7 @@ MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequed
 $ export USERNAME="X001002003"
 $ export PASSWORD="password00"
 
-$ python src/mediathequeroubaix/main.py
+$ python src/mediathequeroubaix/app.py
 Getting loans of user: X001002003
 User: Thomas QUESTE
                                            10 LOANS  
