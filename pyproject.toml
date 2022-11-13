@@ -22,7 +22,7 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-mediathequeroubaix = "mediathequeroubaix.main:app"
+mediathequeroubaix = "mediathequeroubaix.app:app"
 
 [tool.poetry.dependencies]
 python = "3.10.*"
