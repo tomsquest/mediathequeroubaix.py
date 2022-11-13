@@ -17,7 +17,7 @@ class Loan(BaseModel):
     itemcallnumber: str
     # Boolean
     renewable: bool
-    # too_many
+    # Values: too_many, booked
     reasons_not_renewable: str | None
 
     @validator("date_due", pre=True)
