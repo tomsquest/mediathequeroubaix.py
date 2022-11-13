@@ -12,7 +12,7 @@ from mediathequeroubaix.login.authenticated_session import AuthenticatedSession
 def get_loans(session: AuthenticatedSession) -> IOResultE[list[Loan]]:
     return flow(
         session,
-        get_personal_space,
+        _get_personal_space,
         bind_result(extract_token),
         bind_result(base64decode),
         bind_result(parse_loans),
@@ -20,7 +20,7 @@ def get_loans(session: AuthenticatedSession) -> IOResultE[list[Loan]]:
 
 
 @impure_safe
-def get_personal_space(session: AuthenticatedSession) -> str:
+def _get_personal_space(session: AuthenticatedSession) -> str:
     response = session.session.get(
         "http://www.mediathequederoubaix.fr/espace_personnel"
     )

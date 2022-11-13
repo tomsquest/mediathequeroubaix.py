@@ -13,15 +13,15 @@ def login(
 ) -> IOResultE[AuthenticatedSession]:
     return flow(
         (session, username, password),
-        connect,
-        bind_result(get_html),
+        _connect,
+        bind_result(_get_html),
         bind_result(get_user),
         bind_result(safe(lambda user: AuthenticatedSession(session, user))),
     )
 
 
 @impure_safe
-def connect(data: tuple[Session, str, str]) -> Response:
+def _connect(data: tuple[Session, str, str]) -> Response:
     session, username, password = data
     response = session.post(
         "http://www.mediathequederoubaix.fr/user",
@@ -36,5 +36,5 @@ def connect(data: tuple[Session, str, str]) -> Response:
 
 
 @safe
-def get_html(response: Response) -> str:
+def _get_html(response: Response) -> str:
     return response.text

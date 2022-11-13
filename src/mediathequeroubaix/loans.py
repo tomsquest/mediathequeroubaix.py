@@ -25,12 +25,12 @@ def list_loans() -> None:
     print(f"Getting loans of user: {first_user.login}")
     match authenticate(first_user.login, first_user.password):
         case IOSuccess(Success(authenticated_session)):
-            print_loans(authenticated_session)
+            _print_loans(authenticated_session)
         case IOFailure(failure):
             print("❌ FAILURE!", failure)
 
 
-def print_loans(session: AuthenticatedSession) -> None:
+def _print_loans(session: AuthenticatedSession) -> None:
     match get_loans(session):
         case IOSuccess(Success(loans)):
             _print(session.user, loans)
