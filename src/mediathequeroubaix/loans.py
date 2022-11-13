@@ -8,7 +8,10 @@ from mediathequeroubaix.authenticate import authenticate
 from mediathequeroubaix.config import get_config
 from mediathequeroubaix.get_loans.get_loans import get_loans
 from mediathequeroubaix.get_loans.loan import Loan
-from mediathequeroubaix.login.authenticated_session import AuthenticatedSession, User
+from mediathequeroubaix.login.authenticated_session import (
+    AuthenticatedSession,
+    Username,
+)
 
 app = typer.Typer()
 
@@ -33,12 +36,12 @@ def list_loans() -> None:
 def _print_loans(session: AuthenticatedSession) -> None:
     match get_loans(session):
         case IOSuccess(Success(loans)):
-            _print(session.user, loans)
+            _print(session.username, loans)
         case IOFailure(failure):
             print("❌ FAILURE!", failure)
 
 
-def _print(user: User, loans: list[Loan]) -> None:
+def _print(user: Username, loans: list[Loan]) -> None:
     table = Table(
         title=f"{user}: {len(loans)} loans",
         title_style="bold magenta",
