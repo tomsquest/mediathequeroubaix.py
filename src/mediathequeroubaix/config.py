@@ -2,6 +2,10 @@ from pathlib import Path
 
 import typer
 from pydantic import BaseModel, BaseSettings
+from returns.io import IOFailure, IOResultE, IOSuccess
+from returns.pipeline import flow
+from returns.pointfree import bind_ioresult
+from returns.result import Success
 from rich.pretty import pprint
 
 APP_NAME = "mediathequeroubaix"
@@ -10,12 +14,14 @@ app = typer.Typer()
 
 @app.command()
 def show() -> None:
-    config_path = _get_config_path()
-    if config_path.is_file():
-        _show_config(config_path)
-    else:
-        print("Missing config file. You can create it with: 'config create'")
-        raise typer.Exit(code=1)
+    match get_config():
+        case IOSuccess(Success(config)):
+            print(f"Config located at: {_get_config_path()}")
+            print("")
+            pprint(config, expand_all=True)
+        case IOFailure(failure):
+            print(failure)
+            raise typer.Exit(code=1)
 
 
 @app.command()
@@ -41,14 +47,18 @@ class Config(BaseSettings):
         env_prefix = "MR_"  # defaults to no prefix
 
 
-def get_config() -> Config:
-    config_path = _get_config_path()
-    if config_path.is_file():
-        return _read_config(config_path)
-    else:
-        print(f"No config file at {config_path}")
-        print("Please create config file with 'config create'")
-        raise typer.Exit(1)
+def get_config() -> IOResultE[Config]:
+    return flow(
+        _get_config_path(),
+        _is_path_readable,
+        bind_ioresult(_read_as_config),
+    )
+
+
+def _is_path_readable(path: Path) -> IOResultE[Path]:
+    if path.is_file():
+        return IOSuccess(path)
+    return IOFailure(ValueError(f"File {path} is missing or not readable"))
 
 
 def _get_config_path() -> Path:
@@ -56,13 +66,16 @@ def _get_config_path() -> Path:
     return app_path / "config.json"
 
 
-def _read_config(config_path: Path) -> Config:
-    return Config.parse_file(config_path)
+def _read_as_config(path: Path) -> IOResultE[Config]:
+    try:
+        return IOSuccess(Config.parse_file(path))
+    except Exception:
+        return IOFailure(ValueError(f"Invalid configuration: {path}"))
 
 
 def _show_config(config_path: Path) -> None:
     print(f"Config located at: {config_path}")
-    config = _read_config(config_path)
+    config = _read_as_config(config_path)
     print("")
     pprint(config, expand_all=True)
 

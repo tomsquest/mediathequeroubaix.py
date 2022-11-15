@@ -3,6 +3,8 @@ from datetime import date, datetime
 from pydantic import validator
 from pydantic.main import BaseModel
 
+from mediathequeroubaix.login.authenticated_session import Username
+
 
 class Loan(BaseModel):
     # Vampi
@@ -23,3 +25,8 @@ class Loan(BaseModel):
     @validator("date_due", pre=True)
     def parse_date_due(cls, value: str) -> date:
         return datetime.strptime(value, "%Y-%m-%dT%H:%M:%S").date()
+
+
+class Loans(BaseModel):
+    username: Username
+    items: list[Loan]

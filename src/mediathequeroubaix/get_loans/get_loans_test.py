@@ -24,12 +24,13 @@ def test_ok(requests_mock: mock) -> None:
     """,
     )
 
-    result = get_loans(AuthenticatedSession(requests.Session(), Username("John doe")))
+    result = get_loans(AuthenticatedSession(requests.Session(), Username("John Doe")))
 
     assert is_successful(result)
     actual = unsafe_perform_io(result.unwrap())
-    assert len(actual) == 1
-    assert actual[0].title == "L'épreuve d'Hadès"
+    assert actual.username == "John Doe"
+    assert len(actual.items) == 1
+    assert actual.items[0].title == "L'épreuve d'Hadès"
 
 
 def test_no_token(requests_mock: mock) -> None:

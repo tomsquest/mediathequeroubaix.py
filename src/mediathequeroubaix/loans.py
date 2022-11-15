@@ -1,49 +1,53 @@
 import typer
-from returns.io import IOFailure, IOSuccess
-from returns.result import Success
+from returns.io import IOFailure, IOSuccess, impure_safe
+from returns.pipeline import flow
+from returns.pointfree import bind_ioresult, bind_result
+from returns.result import Failure, ResultE, Success
 from rich import box, print
 from rich.table import Table
 
 from mediathequeroubaix.authenticate import authenticate
-from mediathequeroubaix.config import get_config
+from mediathequeroubaix.config import Config, User, get_config
 from mediathequeroubaix.get_loans.get_loans import get_loans
-from mediathequeroubaix.get_loans.loan import Loan
-from mediathequeroubaix.login.authenticated_session import (
-    AuthenticatedSession,
-    Username,
-)
+from mediathequeroubaix.get_loans.loan import Loans
 
 app = typer.Typer()
 
 
 @app.command(name="list")
 def list_loans() -> None:
-    config = get_config()
+    loans = flow(
+        get_config(),
+        bind_result(_get_first_user),
+        bind_ioresult(_print_user),
+        bind_ioresult(authenticate),
+        bind_ioresult(get_loans),
+    )
 
-    if not config.users:
-        print("No users in config file")
-        raise typer.Exit(code=1)
-    first_user = config.users[0]
-
-    print(f"Getting loans of user: {first_user.login}")
-    match authenticate(first_user.login, first_user.password):
-        case IOSuccess(Success(authenticated_session)):
-            _print_loans(authenticated_session)
-        case IOFailure(failure):
-            print("❌ FAILURE!", failure)
-
-
-def _print_loans(session: AuthenticatedSession) -> None:
-    match get_loans(session):
+    match loans:
         case IOSuccess(Success(loans)):
-            _print(session.username, loans)
+            _pretty_print(loans)
         case IOFailure(failure):
             print("❌ FAILURE!", failure)
 
 
-def _print(user: Username, loans: list[Loan]) -> None:
+def _get_first_user(config: Config) -> ResultE[User]:
+    if config.users:
+        # We only support having one user
+        first_user = config.users[0]
+        return Success(first_user)
+    return Failure(ValueError("No user defined in configuration"))
+
+
+@impure_safe
+def _print_user(user: User) -> User:
+    print(f"Getting loans of {user.login}")
+    return user
+
+
+def _pretty_print(loans: Loans) -> None:
     table = Table(
-        title=f"{user}: {len(loans)} loans",
+        title=f"{loans.username}: {len(loans.items)} loans",
         title_style="bold magenta",
         box=box.HEAVY_EDGE,
         expand=True,
@@ -53,10 +57,10 @@ def _print(user: Username, loans: list[Loan]) -> None:
     table.add_column("Due date", justify="center")
     table.add_column("Renewable")
 
-    for index, loan in enumerate(loans):
+    for index, loan in enumerate(loans.items):
         renewable = "✅" if loan.renewable else "❌"
         table.add_row(
-            f"{index+1:>2}/{len(loans)}",
+            f"{index+1:>2}/{len(loans.items)}",
             loan.title,
             f"{loan.date_due:%d/%m/%Y}",
             renewable,

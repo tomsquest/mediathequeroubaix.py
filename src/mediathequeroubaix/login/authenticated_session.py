@@ -6,7 +6,7 @@ from requests import Session
 Username = NewType("Username", str)
 
 
-@dataclass
+@dataclass(frozen=True)
 class AuthenticatedSession:
     session: Session
     username: Username
