@@ -55,7 +55,7 @@ def _pretty_print(loans: Loans) -> None:
     table.add_column("#", justify="center")
     table.add_column("Title", style="blue", ratio=2)
     table.add_column("Due date", justify="center")
-    table.add_column("Renewable")
+    table.add_column("Renewable", justify="center")
 
     for index, loan in enumerate(loans.items):
         renewable = "✅" if loan.renewable else "❌"
