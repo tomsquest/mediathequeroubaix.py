@@ -167,3 +167,4 @@ Find the draft release from the
 - Python project bootstrapped using [Wolt template](https://github.com/woltapp/wolt-python-package-cookiecutter)
 - Functional library is [Returns from DRY-Python](https://github.com/dry-python/returns)
 - Tables look great thanks to [Textualize's Rich](https://github.com/Textualize/rich)
+- CLI screenshot pimped with [ShowCode.app](https://showcode.app)
