@@ -1,11 +1,11 @@
 from typing import Any
 
-import requests
 from requests_mock import mock
 from returns.pipeline import is_successful
 from returns.unsafe import unsafe_perform_io
 
-from mediathequeroubaix.login.login import login
+from mediathequeroubaix.auth.authenticate import authenticate
+from mediathequeroubaix.config import User
 
 
 def match_user_pass(request: Any) -> bool:
@@ -25,16 +25,16 @@ def test_ok(requests_mock: mock) -> None:
         """,
     )
 
-    result = login(session=requests.Session(), username="myuser", password="mypass")
+    result = authenticate(User(login="myuser", password="mypass"))
 
     assert is_successful(result)
     actual = unsafe_perform_io(result.unwrap())
-    assert actual.user == "John DOE"
+    assert actual.username == "John DOE"
 
 
 def test_login_failure(requests_mock: mock) -> None:
     requests_mock.post("http://www.mediathequederoubaix.fr/user", text="some html")
 
-    result = login(session=requests.Session(), username="myuser", password="mypass")
+    result = authenticate(User(login="myuser", password="mypass"))
 
     assert is_successful(result) is False

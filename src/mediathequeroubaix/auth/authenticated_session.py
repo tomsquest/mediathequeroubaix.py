@@ -3,10 +3,10 @@ from typing import NewType
 
 from requests import Session
 
-User = NewType("User", str)
+Username = NewType("Username", str)
 
 
-@dataclass
+@dataclass(frozen=True)
 class AuthenticatedSession:
     session: Session
-    user: User
+    username: Username

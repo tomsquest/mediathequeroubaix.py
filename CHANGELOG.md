@@ -5,8 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
-- Print connected user when getting loans
-- Display due dates as date, not datetime
+- Add CLI (command-line interface) to create a sample config, show the config and get loans
+- Display loans in a pretty table
+- Print the username when getting loans ("Loans of John Doe")
+- Display due dates as date, not date with time
 
 ## [0.2.0] - 2022-10-25
 ### Added

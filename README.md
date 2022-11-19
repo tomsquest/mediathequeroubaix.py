@@ -23,12 +23,14 @@
 - [Features](#features)
   - [Get the loans](#get-the-loans)
 - [Usage](#usage)
+  - [Install](#install)
+  - [Create an initial, sample configuration](#create-an-initial-sample-configuration)
+  - [Display the current configuration](#display-the-current-configuration)
+  - [List the loans](#list-the-loans)
 - [Why I am doing this](#why-i-am-doing-this)
 - [Changelog](#changelog)
 - [Installation](#installation)
 - [Development](#development)
-  - [Testing](#testing)
-  - [Pre-commit](#pre-commit)
   - [Releasing](#releasing)
 - [Credits](#credits)
 
@@ -50,29 +52,50 @@ MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequed
 
 ## Usage
 
-```shell
-$ export USERNAME="X001002003"
-$ export PASSWORD="password00"
+### Install
 
-$ python src/mediathequeroubaix/main.py
-Getting loans of user: X001002003
-User: Thomas QUESTE
-                                           10 LOANS  
-┏━━━━━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━━━━━━┯━━━━━━━━━━━┓
-┃   #   │ Title                                                      │  Due date  │ Renewable ┃
-┠───────┼────────────────────────────────────────────────────────────┼────────────┼───────────┨
-┃  1/10 │ Opération trolls !                                         │ 12/11/2022 │ ✅        ┃
-┃  2/10 │ Le secret du Bagueer                                       │ 12/11/2022 │ ✅        ┃
-┃  3/10 │ Le grand pouvoir                                           │ 12/11/2022 │ ✅        ┃
-┃  4/10 │ Poursuivie !                                               │ 12/11/2022 │ ✅        ┃
-┃  5/10 │ À la recherche d'Ulysse                                    │ 12/11/2022 │ ✅        ┃
-┃  6/10 │ Monstrueux dinosaure                                       │ 12/11/2022 │ ✅        ┃
-┃  7/10 │ La grande aventure                                         │ 12/11/2022 │ ✅        ┃
-┃  8/10 │ Le bonheur est un céphalopode visqueux                     │ 12/11/2022 │ ✅        ┃
-┃  9/10 │ La folle vie de Bouboule Gum                               │ 12/11/2022 │ ✅        ┃
-┃ 10/10 │ Au revoir là-haut                                          │ 19/11/2022 │ ❌        ┃
-┗━━━━━━━┷━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┷━━━━━━━━━━━━┷━━━━━━━━━━━┛
+```shell
+pip install mediathequederoubaix
 ```
+
+### Create an initial, sample configuration
+
+`config create` makes a sample configuration in `$HOME/.config/mediathequederoubaix/config.json` and display the content of the file.  
+The configuration is initialized with a sample but fake user.
+
+```shell
+mediathequeroubaix config create
+```
+
+<p align="center" width="100%">
+  <img src="doc/cli_config_create.png" alt="Screenshot CLI config create"/>
+</p>
+
+### Display the current configuration
+
+`config show` displays the current configuration.
+
+```shell
+mediathequeroubaix config show
+```
+
+<p align="center" width="100%">
+  <img src="doc/cli_config_show.png" alt="Screenshot CLI config show"/>
+</p>
+
+### List the loans
+
+`loans list` show the list of loans for the users.
+
+```shell
+mediathequeroubaix loans list
+```
+
+<p align="center" width="100%">
+  <img src="doc/cli_loans_list.png" alt="Screenshot CLI loans list"/>
+</p>
+
+**⚠️ Only the first user in the config is supported. Multi-users is planned**.
 
 ## Why I am doing this
 
@@ -109,13 +132,7 @@ poetry install
 poetry shell
 ```
 
-### Testing
-
-```sh
-pytest
-```
-
-### Pre-commit
+* Pre-commit
 
 ```sh
 pre-commit install
@@ -125,6 +142,12 @@ Or if you want to run all checks for all files:
 
 ```sh
 pre-commit run --all-files
+```
+
+* Testing
+
+```sh
+pytest
 ```
 
 ### Releasing
