@@ -1,18 +1,19 @@
+import requests
 from requests import Response, Session
 from returns.io import IOResultE, impure_safe
 from returns.pipeline import flow
 from returns.pointfree import bind_result
 from returns.result import safe
 
-from mediathequeroubaix.login.authenticated_session import AuthenticatedSession
-from mediathequeroubaix.login.get_user import get_user
+from mediathequeroubaix.auth.authenticated_session import AuthenticatedSession
+from mediathequeroubaix.auth.get_user import get_user
+from mediathequeroubaix.config import User
 
 
-def login(
-    session: Session, username: str, password: str
-) -> IOResultE[AuthenticatedSession]:
+def authenticate(user: User) -> IOResultE[AuthenticatedSession]:
+    session = requests.Session()
     return flow(
-        (session, username, password),
+        (requests.Session(), user.login, user.password),
         _connect,
         bind_result(_get_html),
         bind_result(get_user),

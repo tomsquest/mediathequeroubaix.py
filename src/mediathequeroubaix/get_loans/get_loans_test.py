@@ -5,11 +5,8 @@ from requests_mock import mock
 from returns.pipeline import is_successful
 from returns.unsafe import unsafe_perform_io
 
+from mediathequeroubaix.auth.authenticated_session import AuthenticatedSession, Username
 from mediathequeroubaix.get_loans.get_loans import get_loans
-from mediathequeroubaix.login.authenticated_session import (
-    AuthenticatedSession,
-    Username,
-)
 
 
 def test_ok(requests_mock: mock) -> None:

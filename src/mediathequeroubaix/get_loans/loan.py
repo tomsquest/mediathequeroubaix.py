@@ -3,7 +3,7 @@ from datetime import date, datetime
 from pydantic import validator
 from pydantic.main import BaseModel
 
-from mediathequeroubaix.login.authenticated_session import Username
+from mediathequeroubaix.auth.authenticated_session import Username
 
 
 class Loan(BaseModel):

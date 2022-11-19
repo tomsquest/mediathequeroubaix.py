@@ -1,6 +1,6 @@
 from returns.result import Success
 
-from mediathequeroubaix.login.get_user import get_user
+from mediathequeroubaix.auth.get_user import get_user
 
 
 def test_ok() -> None:

@@ -6,7 +6,7 @@ from returns.result import Failure, ResultE, Success
 from rich import box, print
 from rich.table import Table
 
-from mediathequeroubaix.authenticate import authenticate
+from mediathequeroubaix.auth.authenticate import authenticate
 from mediathequeroubaix.config import Config, User, get_config
 from mediathequeroubaix.get_loans.get_loans import get_loans
 from mediathequeroubaix.get_loans.loan import Loans

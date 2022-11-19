@@ -3,11 +3,11 @@ from returns.pipeline import flow
 from returns.pointfree import bind_result
 from returns.result import safe
 
+from mediathequeroubaix.auth.authenticated_session import AuthenticatedSession
 from mediathequeroubaix.get_loans.base64decode import base64decode
 from mediathequeroubaix.get_loans.extract_token import extract_token
 from mediathequeroubaix.get_loans.loan import Loans
 from mediathequeroubaix.get_loans.parse_loans import parse_loans
-from mediathequeroubaix.login.authenticated_session import AuthenticatedSession
 
 
 def get_loans(session: AuthenticatedSession) -> IOResultE[Loans]:
