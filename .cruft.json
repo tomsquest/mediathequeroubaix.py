@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/woltapp/wolt-python-package-cookiecutter",
-  "commit": "6669a067eeaaed3bee84312428a3e94cd13295f2",
+  "commit": "939ec0f2b97c172178eb5c77fb61a7df937696aa",
   "checkout": null,
   "context": {
     "cookiecutter": {
