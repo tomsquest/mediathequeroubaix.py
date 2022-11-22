@@ -664,7 +664,7 @@ test = ["fixtures", "mock", "purl", "pytest", "requests-futures", "sphinx", "tes
 name = "returns"
 version = "0.19.0"
 description = "Make your functions return something meaningful, typed, and safe!"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
 
@@ -848,7 +848,7 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10.*"
-content-hash = "edf646e7ba2e5da067f6a7c607250312e7b7c57aece149b18a48e4be1e5d801e"
+content-hash = "ca160bab0e7a15f7fead92a7e574179604a776fd83a48bc52443d9c673b6eb5d"
 
 [metadata.files]
 attrs = [
