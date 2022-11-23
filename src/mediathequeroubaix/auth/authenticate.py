@@ -13,7 +13,7 @@ from mediathequeroubaix.config import User
 def authenticate(user: User) -> IOResultE[AuthenticatedSession]:
     session = requests.Session()
     return flow(
-        (requests.Session(), user.login, user.password),
+        (session, user.login, user.password),
         _connect,
         bind_result(_get_html),
         bind_result(get_user),
