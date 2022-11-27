@@ -1,13 +1,13 @@
 import typer
-from returns.io import IOFailure, IOSuccess, impure_safe
+from returns.io import IOFailure, IOResultE, IOSuccess
 from returns.pipeline import flow
-from returns.pointfree import bind_ioresult, bind_result
-from returns.result import Failure, ResultE, Success
+from returns.pointfree import bind_ioresult
+from returns.result import Success
 from rich import box, print
 from rich.table import Table
 
 from mediathequeroubaix.auth.authenticate import authenticate
-from mediathequeroubaix.config import Config, User, get_config
+from mediathequeroubaix.config import User, get_config
 from mediathequeroubaix.get_loans.get_loans import get_loans
 from mediathequeroubaix.get_loans.loan import Loans
 
@@ -16,33 +16,30 @@ app = typer.Typer()
 
 @app.command(name="list")
 def list_loans() -> None:
-    loans = flow(
-        get_config(),
-        bind_result(_get_first_user),
-        bind_ioresult(_print_user),
-        bind_ioresult(authenticate),
+    match get_config():
+        case IOSuccess(Success(config)):
+            if not config.users:
+                print("❌ No user defined in configuration")
+                raise typer.Exit(1)
+
+            for user in config.users:
+                print(f"Getting loans of user '{user.login}'")
+                match _get_user_loans(user):
+                    case IOSuccess(Success(loans)):
+                        _pretty_print(loans)
+                    case IOFailure(failure):
+                        print(f"❌ Unable to get loans of user '{user.login}'", failure)
+        case IOFailure(failure):
+            print("❌ Unable to read configuration!", failure)
+            raise typer.Exit(1)
+
+
+def _get_user_loans(user: User) -> IOResultE[Loans]:
+    return flow(
+        user,
+        authenticate,
         bind_ioresult(get_loans),
     )
-
-    match loans:
-        case IOSuccess(Success(loans)):
-            _pretty_print(loans)
-        case IOFailure(failure):
-            print("❌ FAILURE!", failure)
-
-
-def _get_first_user(config: Config) -> ResultE[User]:
-    if config.users:
-        # We only support having one user
-        first_user = config.users[0]
-        return Success(first_user)
-    return Failure(ValueError("No user defined in configuration"))
-
-
-@impure_safe
-def _print_user(user: User) -> User:
-    print(f"Getting loans of {user.login}")
-    return user
 
 
 def _pretty_print(loans: Loans) -> None:
