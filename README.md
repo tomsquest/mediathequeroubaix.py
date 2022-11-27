@@ -47,7 +47,7 @@ MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequed
 ### Get the loans
 
 1. Display a **list of your loans** and their due date
-2. ...for **many card holders** at once (family) (TODO)
+2. ...for **many cardholders** at once
 3. and check the **next return date** for all you cards (TODO)
 
 ## Usage
@@ -95,8 +95,6 @@ mediathequeroubaix loans list
   <img src="doc/cli_loans_list.png" alt="Screenshot CLI loans list"/>
 </p>
 
-**⚠️ Only the first user in the config is supported. Multi-users is planned**.
-
 ## Why I am doing this
 
 I created this project to:
@@ -138,16 +136,16 @@ poetry shell
 pre-commit install
 ```
 
-Or if you want to run all checks for all files:
-
-```sh
-pre-commit run --all-files
-```
-
 * Testing
 
 ```sh
 pytest
+```
+
+* Check everything
+
+```sh
+pre-commit run --all-files
 ```
 
 ### Releasing
