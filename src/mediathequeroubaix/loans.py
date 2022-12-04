@@ -48,19 +48,28 @@ def _pretty_print(loans: Loans) -> None:
         title_style="bold magenta",
         box=box.HEAVY_EDGE,
         expand=True,
+        show_footer=True,
     )
-    table.add_column("#", justify="center")
-    table.add_column("Title", style="blue", ratio=2)
-    table.add_column("Due date", justify="center")
-    table.add_column("Renewable", justify="center")
 
-    for index, loan in enumerate(loans.items):
-        renewable = "✅" if loan.renewable else "❌"
-        table.add_row(
-            f"{index+1:>2}/{len(loans.items)}",
-            loan.title,
-            f"{loan.date_due:%d/%m/%Y}",
-            renewable,
+    if not loans.items:
+        print(f"No loans for user {loans.username}...")
+    else:
+        soonest_due_loan = min(loans.items, key=lambda l: l.date_due)
+
+        table.add_column("#", justify="center")
+        table.add_column("Title", style="blue", ratio=2)
+        table.add_column(
+            "Due date", justify="center", footer=f"{soonest_due_loan.date_due:%d/%m/%Y}"
         )
+        table.add_column("Renewable", justify="center")
 
-    print(table)
+        for index, loan in enumerate(loans.items):
+            renewable = "✅" if loan.renewable else "❌"
+            table.add_row(
+                f"{index+1:>2}/{len(loans.items)}",
+                loan.title,
+                f"{loan.date_due:%d/%m/%Y}",
+                renewable,
+            )
+
+        print(table)
