@@ -30,6 +30,7 @@ def test_someloans() -> None:
                 issuedate="2022-10-08T14:30:14",
                 date_due="2022-11-19T23:59:00",
                 itemcallnumber="E BD/LEG",
+                itemnumber=360556,
                 renewable=False,
                 reasons_not_renewable="too_many",
             ),
@@ -39,6 +40,7 @@ def test_someloans() -> None:
                 issuedate="2020-01-02T03:04:05",
                 date_due="2020-01-02T03:04:06",
                 itemcallnumber="R ABC",
+                itemnumber=341991,
                 renewable=True,
             ),
         ]

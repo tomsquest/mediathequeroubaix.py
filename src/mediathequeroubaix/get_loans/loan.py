@@ -17,6 +17,8 @@ class Loan(BaseModel):
     date_due: date
     # E BD/FON
     itemcallnumber: str
+    # Used to renew: 1234567
+    itemnumber: int
     # Boolean
     renewable: bool
     # Values: too_many, booked
