@@ -51,6 +51,15 @@ def renew_loans() -> None:
                 print("❌ Failed to renew loans!", failure)
                 raise typer.Exit(1)
 
+        # After renew, print the loans with their new due date
+        loans = flow(auth, bind_ioresult(get_loans))
+        match loans:
+            case IOSuccess(Success(loans)):
+                _print_loans(loans)
+            case IOFailure(failure):
+                print(f"❌ Unable to get loans of user '{user.login}'", failure)
+                raise typer.Exit(1)
+
 
 def _load_config_or_raise() -> Config:
     try:
