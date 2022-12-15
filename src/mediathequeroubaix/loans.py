@@ -27,7 +27,7 @@ def list_loans() -> None:
         loans = flow(user, authenticate, bind_ioresult(get_loans))
         match loans:
             case IOSuccess(Success(loans)):
-                _pretty_print(loans)
+                _print_loans(loans)
             case IOFailure(failure):
                 print(f"❌ Unable to get loans of user '{user.login}'", failure)
                 raise typer.Exit(1)
@@ -71,7 +71,7 @@ def _get_users_or_raise(config: Config) -> list[User]:
     return config.users
 
 
-def _pretty_print(loans: Loans) -> None:
+def _print_loans(loans: Loans) -> None:
     table = Table(
         title=f"{loans.username}: {len(loans.items)} loans",
         title_style="bold magenta",
