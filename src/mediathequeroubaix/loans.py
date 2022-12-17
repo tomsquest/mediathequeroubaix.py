@@ -95,6 +95,8 @@ def _print_loans(loans: Loans) -> None:
         soonest_due_loan = min(loans.items, key=lambda l: l.date_due)
 
         table.add_column("#", justify="center")
+        table.add_column("Barcode")
+        table.add_column("Call number")
         table.add_column("Title", style="blue", ratio=2)
         table.add_column(
             "Due date", justify="center", footer=f"{soonest_due_loan.date_due:%d/%m/%Y}"
@@ -105,6 +107,8 @@ def _print_loans(loans: Loans) -> None:
             renewable = "✅" if loan.renewable else "❌"
             table.add_row(
                 f"{index + 1:>2}/{len(loans.items)}",
+                loan.barcode,
+                loan.itemcallnumber,
                 loan.title,
                 f"{loan.date_due:%d/%m/%Y}",
                 renewable,
