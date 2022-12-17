@@ -581,17 +581,6 @@ toml = ["toml"]
 yaml = ["ruamel.yaml (>=0.17)"]
 
 [[package]]
-name = "python-dotenv"
-version = "0.21.0"
-description = "Read key-value pairs from a .env file and set them as environment variables"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.extras]
-cli = ["click (>=5.0)"]
-
-[[package]]
 name = "python-kacl"
 version = "0.2.30"
 description = "Python module and CLI tool for validating and modifying Changelogs in \"keep-a-changelog\" format\""
@@ -848,7 +837,7 @@ testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10.*"
-content-hash = "ca160bab0e7a15f7fead92a7e574179604a776fd83a48bc52443d9c673b6eb5d"
+content-hash = "15e1619713d1c3d91bb033eaf6d9f3ceab2f893ff289205ff01fbf5d322487b4"
 
 [metadata.files]
 attrs = [
@@ -1182,10 +1171,6 @@ python-box = [
     {file = "python_box-6.0.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8595d6916eb2ee6c097066886faa5a3fc9392abba8835faa63fd189d1b6ec11b"},
     {file = "python_box-6.0.2-cp39-cp39-win_amd64.whl", hash = "sha256:99e9f88069855e76cbc4846527d35bc9d1858f2272ab741f29a71c92b72b7b5b"},
     {file = "python_box-6.0.2-py3-none-any.whl", hash = "sha256:2565dd56d5e9107e1499ab864f7a4dcd60f63dd5d68215a019308e36c0c98dbc"},
-]
-python-dotenv = [
-    {file = "python-dotenv-0.21.0.tar.gz", hash = "sha256:b77d08274639e3d34145dfa6c7008e66df0f04b7be7a75fd0d5292c191d79045"},
-    {file = "python_dotenv-0.21.0-py3-none-any.whl", hash = "sha256:1684eb44636dd462b66c3ee016599815514527ad99965de77f43e0944634a7e5"},
 ]
 python-kacl = [
     {file = "python-kacl-0.2.30.tar.gz", hash = "sha256:b1caa9ec93984120e13fc412cc891b1d22c7abc06a3feef97b93a2f7ad9cbec3"},

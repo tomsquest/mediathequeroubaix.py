@@ -27,7 +27,6 @@ mediathequeroubaix = "mediathequeroubaix.app:app"
 [tool.poetry.dependencies]
 python = "3.10.*"
 requests = "^2.28.1"
-python-dotenv = "^0.21.0"
 pydantic = "^1.10.2"
 returns = "^0.19.0"
 rich = "^12.6.0"
