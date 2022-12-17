@@ -10,6 +10,8 @@
 
 ---
 
+**Releases**: [https://github.com/tomsquest/mediathequeroubaix.py/releases](https://github.com/tomsquest/mediathequeroubaix.py/releases)
+
 **Source Code**: [https://github.com/tomsquest/mediathequeroubaix.py](https://github.com/tomsquest/mediathequeroubaix.py)
 
 **PyPI**: [https://pypi.org/project/mediathequeroubaix/](https://pypi.org/project/mediathequeroubaix/)
@@ -21,12 +23,14 @@
 ## Table of Contents
 
 - [Features](#features)
-  - [Get the loans](#get-the-loans)
+  - [Display your loans](#display-your-loans)
+  - [Renew your loans](#renew-your-loans)
 - [Usage](#usage)
   - [Install](#install)
   - [Create an initial, sample configuration](#create-an-initial-sample-configuration)
   - [Display the current configuration](#display-the-current-configuration)
   - [List the loans](#list-the-loans)
+  - [Renew the loans](#renew-the-loans)
 - [Why I am doing this](#why-i-am-doing-this)
 - [Changelog](#changelog)
 - [Installation](#installation)
@@ -38,17 +42,27 @@
 
 ## Features
 
-MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequederoubaix.fr](http://www.mediathequederoubaix.fr/).  
+MédiathèqueRoubaix.py is a client for the **libray of Roubaix**, [mediathequederoubaix.fr](http://www.mediathequederoubaix.fr/).
 
 <p align="center" width="100%">
   <img src="doc/mr_homepage.png" alt="Screenshot mediathequederoubaix.fr"/>
 </p>
 
-### Get the loans
+### Display your loans
 
-1. Display a **list of your loans** and their due date
-2. ...for **many cardholders** at once
-3. and check the **next return date** for all you cards (TODO)
+Running `mediathequeroubaix loans list` will:
+
+1. Get the **list of your loans** and their due date
+2. ...for **many cardholders**
+3. and check the **next return date** for each of your card
+
+### Renew your loans
+
+Running `mediathequeroubaix loans renew` will:
+
+1. Renew **automatically** all loans
+2. ...for **many cardholders**
+3. and print the **new due date** of the loans
 
 ## Usage
 
@@ -95,9 +109,22 @@ mediathequeroubaix loans list
   <img src="doc/cli_loans_list.png" alt="Screenshot CLI loans list"/>
 </p>
 
+### Renew the loans
+
+`loans renew` renew the list of loans for the users and display the new loans.
+
+```shell
+mediathequeroubaix loans renew
+```
+
+<p align="center" width="100%">
+  <img src="doc/cli_loans_renew.png" alt="Screenshot CLI loans renew"/>
+</p>
+
 ## Why I am doing this
 
 I created this project to:
+
 1. Learn **Functional Programing**
 2. Learn **typed** and **modern** Python
 3. Be able to quickly list and renew my loans (especially when you have many cards)
@@ -116,8 +143,8 @@ pip install mediathequeroubaix
 
 * Clone this repository
 * Requirements:
-  * [Poetry](https://python-poetry.org/)
-  * Python 3.10
+    * [Poetry](https://python-poetry.org/)
+    * Python 3.10
 * Create a virtual environment and install the dependencies
 
 ```sh
@@ -130,19 +157,19 @@ poetry install
 poetry shell
 ```
 
-* Pre-commit
+* Install Pre-commit
 
 ```sh
 pre-commit install
 ```
 
-* Testing
+* Test
 
 ```sh
 pytest
 ```
 
-* Check everything
+* Check everything in one go
 
 ```sh
 pre-commit run --all-files
@@ -155,9 +182,8 @@ Trigger the [Draft release workflow](https://github.com/tomsquest/mediathequerou
 
 Find the draft release from the
 [GitHub releases](https://github.com/tomsquest/mediathequeroubaix.py/releases) and publish it. When
- a release is published, it'll trigger [release](https://github.com/tomsquest/mediathequeroubaix.py/blob/master/.github/workflows/release.yml) workflow which creates PyPI
- release.
-
+a release is published, it'll trigger [release](https://github.com/tomsquest/mediathequeroubaix.py/blob/master/.github/workflows/release.yml) workflow which creates PyPI
+release.
 
 ## Credits
 

@@ -1,48 +1,86 @@
 import typer
-from returns.io import IOFailure, IOResultE, IOSuccess
+from returns.io import IOFailure, IOSuccess
+from returns.iterables import Fold
 from returns.pipeline import flow
 from returns.pointfree import bind_ioresult
 from returns.result import Success
+from returns.unsafe import unsafe_perform_io
 from rich import box, print
 from rich.table import Table
 
 from mediathequeroubaix.auth.authenticate import authenticate
-from mediathequeroubaix.config import User, get_config
+from mediathequeroubaix.config import Config, User, get_config
 from mediathequeroubaix.get_loans.get_loans import get_loans
 from mediathequeroubaix.get_loans.loan import Loans
+from mediathequeroubaix.renew.renew import renew
 
 app = typer.Typer()
 
 
 @app.command(name="list")
 def list_loans() -> None:
-    match get_config():
-        case IOSuccess(Success(config)):
-            if not config.users:
-                print("❌ No user defined in configuration")
+    config = _load_config_or_raise()
+    users = _get_users_or_raise(config)
+    for user in users:
+        print(f"Getting loans of user '{user.login}'")
+
+        loans = flow(user, authenticate, bind_ioresult(get_loans))
+        match loans:
+            case IOSuccess(Success(loans)):
+                _print_loans(loans)
+            case IOFailure(failure):
+                print(f"❌ Unable to get loans of user '{user.login}'", failure)
                 raise typer.Exit(1)
 
-            for user in config.users:
-                print(f"Getting loans of user '{user.login}'")
-                match _get_user_loans(user):
-                    case IOSuccess(Success(loans)):
-                        _pretty_print(loans)
-                    case IOFailure(failure):
-                        print(f"❌ Unable to get loans of user '{user.login}'", failure)
-        case IOFailure(failure):
-            print("❌ Unable to read configuration!", failure)
-            raise typer.Exit(1)
+
+@app.command(name="renew")
+def renew_loans() -> None:
+    config = _load_config_or_raise()
+    users = _get_users_or_raise(config)
+    for user in users:
+        print(f"Renewing loans of user '{user.login}'")
+
+        auth = flow(user, authenticate)
+        loans = flow(auth, bind_ioresult(get_loans))
+        results = Fold.collect([auth, loans], IOSuccess(()))
+        match results:
+            case IOSuccess(Success(successes)):
+                the_session, the_loans = successes
+                renew(the_session, the_loans)
+            case IOFailure(failure):
+                print("❌ Failed to renew loans!", failure)
+                raise typer.Exit(1)
+
+        # After renew, print the loans with their new due date
+        loans = flow(auth, bind_ioresult(get_loans))
+        match loans:
+            case IOSuccess(Success(loans)):
+                _print_loans(loans)
+            case IOFailure(failure):
+                print(f"❌ Unable to get loans of user '{user.login}'", failure)
+                raise typer.Exit(1)
 
 
-def _get_user_loans(user: User) -> IOResultE[Loans]:
-    return flow(
-        user,
-        authenticate,
-        bind_ioresult(get_loans),
-    )
+def _load_config_or_raise() -> Config:
+    try:
+        result = get_config()
+        io = result.unwrap()
+        config = unsafe_perform_io(io)
+    except Exception as e:
+        print("❌ Unable to read configuration!", e)
+        raise typer.Exit(1) from e
+    else:
+        return config
 
 
-def _pretty_print(loans: Loans) -> None:
+def _get_users_or_raise(config: Config) -> list[User]:
+    if not config.users:
+        print("❌ No user defined in configuration")
+        raise typer.Exit(1)
+    return config.users
+
+
+def _print_loans(loans: Loans) -> None:
     table = Table(
         title=f"{loans.username}: {len(loans.items)} loans",
         title_style="bold magenta",
@@ -66,7 +104,7 @@ def _pretty_print(loans: Loans) -> None:
         for index, loan in enumerate(loans.items):
             renewable = "✅" if loan.renewable else "❌"
             table.add_row(
-                f"{index+1:>2}/{len(loans.items)}",
+                f"{index + 1:>2}/{len(loans.items)}",
                 loan.title,
                 f"{loan.date_due:%d/%m/%Y}",
                 renewable,
