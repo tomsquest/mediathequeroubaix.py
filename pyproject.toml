@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mediathequeroubaix"
-version = "1.3.0"
+version = "1.4.0"
 description = "Client for the library of Roubaix (Médiathèque Roubaix)"
 authors = [
     "Thomas Queste <tom@tomsquest.com>",
