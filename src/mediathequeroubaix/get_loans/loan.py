@@ -16,7 +16,7 @@ class Loan(BaseModel):
     # 2022-11-19T23:59:00
     date_due: date
     # E BD/FON
-    itemcallnumber: str
+    itemcallnumber: str | None
     # Used to renew: 1234567
     itemnumber: int
     # Boolean
