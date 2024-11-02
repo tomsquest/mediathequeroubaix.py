@@ -1,9 +1,9 @@
 from returns.result import safe
-import json
 from typing import List
 from pydantic import BaseModel, Json
 
 from mediathequeroubaix.get_loans.loan import Loan
+
 
 class JsonStringWrapper(BaseModel):
     json_obj: Json[List[Loan]]
