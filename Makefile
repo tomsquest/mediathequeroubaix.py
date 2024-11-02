@@ -4,11 +4,11 @@ SHELL:=/usr/bin/env bash
 
 .PHONY: check
 check:
-	poetry run pre-commit run --all-files
+	uv run pre-commit run --all-files
 
 .PHONY: format
 format:
-	poetry run black src
+	uv run ruff format
 
 .PHONY: clean
 clean:

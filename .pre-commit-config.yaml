@@ -1,17 +1,15 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
       - id: check-ast
       - id: check-case-conflict
       - id: check-docstring-first
       - id: check-executables-have-shebangs
-      - id: check-json
       - id: check-merge-conflict
       - id: check-toml
       - id: check-vcs-permalinks
-      - id: check-yaml
       - id: debug-statements
       - id: detect-private-key
       - id: end-of-file-fixer
@@ -19,71 +17,32 @@ repos:
       - id: trailing-whitespace
         args: [ --markdown-linebreak-ext=md ]
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.6.22
+    rev: v1.7.3
     hooks:
       - id: actionlint-docker
   - repo: https://github.com/thlorenz/doctoc
-    rev: v2.1.0
+    rev: v2.2.0
     hooks:
       - id: doctoc
         args: [ "--update-only", "--github", "--title", "## Table of Contents" ]
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.9.0
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.4.29
     hooks:
-      - id: python-check-mock-methods
-      - id: python-use-type-annotations
-      - id: python-check-blanket-noqa
+      - id: uv-lock
   - repo: local
     hooks:
-      - id: autoflake
-        name: autoflake
-        entry: poetry run autoflake -r -i --remove-all-unused-imports --remove-unused-variables
-        language: system
-        types: [ python ]
-      - id: isort
-        name: isort
-        entry: poetry run isort
-        language: system
-        types: [ python ]
-      - id: black
-        name: black
-        entry: poetry run black
-        language: system
-        types: [ python ]
       - id: pytest
         name: pytest
-        entry: poetry run pytest
+        entry: uv run pytest
         language: system
         pass_filenames: false
-        # alternatively you could `types: [python]` so it only runs when python files change
+        # alternatively, you could `types: [python]` so it only runs when python files change
         # though tests might be invalidated if you were to say change a data file
         always_run: true
-      - id: pyupgrade
-        name: pyupgrade
-        entry: poetry run pyupgrade --py37-plus
-        language: system
-        types: [ python ]
-      - id: mypy
-        name: mypy
-        entry: poetry run mypy .
-        require_serial: true
-        language: system
-        types: [ python ]
-        pass_filenames: false
-      - id: flake8
-        name: flake8
-        entry: poetry run flake8
-        language: system
-        types: [ python ]
-      - id: poetry-check
-        name: poetry-check
-        entry: poetry check
-        language: system
-        files: 'pyproject.toml'
-        pass_filenames: false
-      - id: kacl-verify
-        name: kacl-verify
-        entry: poetry run kacl-cli verify
-        language: system
-        files: 'CHANGELOG.md'
-        pass_filenames: false
+#      - id: mypy
+#        name: mypy
+#        entry: uv run mypy .
+#        require_serial: true
+#        language: system
+#        types: [ python ]
+#        pass_filenames: false

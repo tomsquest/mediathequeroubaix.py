@@ -1,7 +1,7 @@
 from pathlib import Path
-
 import typer
-from pydantic import BaseModel, BaseSettings
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings
 from returns.io import IOFailure, IOResultE, IOSuccess
 from returns.pipeline import flow
 from returns.pointfree import bind_ioresult
@@ -46,9 +46,6 @@ class User(BaseModel):
 
 class Config(BaseSettings):
     users: list[User] = []
-
-    class Config:
-        env_prefix = "MR_"  # defaults to no prefix
 
 
 def get_config() -> IOResultE[Config]:

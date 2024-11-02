@@ -12,4 +12,4 @@ def test_empty() -> None:
 
 
 def test_invalid() -> None:
-    assert str(base64decode("[]{}")) == "<Failure: Non-base64 digit found>"
+    assert str(base64decode("[]{}")) == "<Failure: Only base64 data is allowed>"
