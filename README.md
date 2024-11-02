@@ -26,14 +26,13 @@
   - [Display your loans](#display-your-loans)
   - [Renew your loans](#renew-your-loans)
 - [Usage](#usage)
-  - [Install](#install)
+  - [Running](#running)
   - [Create an initial, sample configuration](#create-an-initial-sample-configuration)
   - [Display the current configuration](#display-the-current-configuration)
   - [List the loans](#list-the-loans)
   - [Renew the loans](#renew-the-loans)
 - [Why I am doing this](#why-i-am-doing-this)
 - [Changelog](#changelog)
-- [Installation](#installation)
 - [Development](#development)
   - [Releasing](#releasing)
 - [Credits](#credits)
@@ -66,10 +65,24 @@ Running `mediathequeroubaix loans renew` will:
 
 ## Usage
 
-### Install
+### Running
+
+With Pipx:
 
 ```shell
-pip install mediathequederoubaix
+pipx run mediathequederoubaix
+```
+
+With UV:
+
+```shell
+uvx mediathequederoubaix
+```
+
+If you want to install it globally:
+
+```shell
+pipx install mediathequeroubaix
 ```
 
 ### Create an initial, sample configuration
@@ -133,37 +146,17 @@ I created this project to:
 
 See [CHANGELOG.md](CHANGELOG.md)
 
-## Installation
-
-```sh
-pip install mediathequeroubaix
-```
-
 ## Development
 
 * Clone this repository
-* Requirements:
-    * [Poetry](https://python-poetry.org/)
-    * Python 3.10
-* Create a virtual environment and install the dependencies
-
-```sh
-poetry install
+* Install [UV](https://docs.astral.sh/uv/)
+* (Optional) if using direnv, create .envrc with:
+```
+uv sync
+source .venv/bin/activate
 ```
 
-* Activate the virtual environment
-
-```sh
-poetry shell
-```
-
-* Install Pre-commit
-
-```sh
-pre-commit install
-```
-
-* Test
+* Testing
 
 ```sh
 pytest
