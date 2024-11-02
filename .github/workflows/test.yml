@@ -11,6 +11,12 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/python-poetry-env
-      - run: poetry run pre-commit run --all-files
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.29"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - run: uv python install
+      - run: uv sync --all-extras --dev
+      - run: uv run pre-commit run --all-files
