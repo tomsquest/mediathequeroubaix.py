@@ -8,11 +8,11 @@ from returns.unsafe import unsafe_perform_io
 from rich import box, print
 from rich.table import Table
 
-from mediathequeroubaix.auth.authenticate import authenticate
-from mediathequeroubaix.config import Config, User, get_config
-from mediathequeroubaix.get_loans.get_loans import get_loans
-from mediathequeroubaix.get_loans.loan import Loans
-from mediathequeroubaix.renew.renew import renew
+from .auth.authenticate import authenticate
+from .config import Config, User, get_config
+from .get_loans.get_loans import get_loans
+from .get_loans.loan import Loans
+from .renew.renew import renew
 
 app = typer.Typer()
 
