@@ -170,13 +170,13 @@ pre-commit run --all-files
 
 ### Releasing
 
-Trigger the [Draft release workflow](https://github.com/tomsquest/mediathequeroubaix.py/actions/workflows/draft_release.yml)
-(press _Run workflow_). This will update the changelog & version and create a GitHub release which is in _Draft_ state.
+1. Commit, tag, publish using the release script:
+```shell
+./bin/release.py 1.2.3
+```
+2. Update `CHANGELOG.md`
+3. Create a new release on GitHub
 
-Find the draft release from the
-[GitHub releases](https://github.com/tomsquest/mediathequeroubaix.py/releases) and publish it. When
-a release is published, it'll trigger [release](https://github.com/tomsquest/mediathequeroubaix.py/blob/master/.github/workflows/release.yml) workflow which creates PyPI
-release.
 
 ## Credits
 
