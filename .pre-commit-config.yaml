@@ -38,10 +38,11 @@ repos:
         types: [ python ]
         pass_filenames: false
         always_run: true
-#      - id: mypy
-#        name: mypy
-#        entry: uv run mypy .
-#        require_serial: true
-#        language: system
-#        types: [ python ]
-#        pass_filenames: false
+      - id: mypy
+        name: mypy
+        entry: uv run mypy .
+        require_serial: true
+        language: system
+        types: [ python ]
+        pass_filenames: false
+        always_run: true
