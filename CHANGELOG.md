@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.5.0] - 2024-11-02
 ### Added
-- Switch to UV
+- Switch to UV.
+
+The goal was to be able to run the project using pipx.  
+Yes, it would have been possible with Poetry, but I also wanted to simplify the project thanks to UV.  
+In the end, switching to UV was not that easy: the pyproject.toml format is different between UV and Poetry (the author, the license fields...), I upgraded Pydantic to V2 which breaks stuff (and old code is hard to remember)...
 
 ## [1.4.1] - 2023-01-14
 ### Fixed
