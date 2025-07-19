@@ -17,7 +17,7 @@ def test_empty_array() -> None:
     assert parse_loans("[]") == Success([])
 
 
-def test_someloans() -> None:
+def test_some_loans() -> None:
     assert parse_loans(
         '[{"reasons_not_renewable": "too_many", "biblionumber": 298309, "issuedate": "2022-10-08T14:30:14", '
         '"barcode": "C2500002968", "branchcode": "MED", "itemcallnumber": "E BD/LEG", "date_due": "2022-11-19T23:59:00", "holdingbranch": "M\u00e9diath\u00e8que", "renewable": false, "borrowernumber": 48742, "title": "L\'\u00e9preuve d\'Had\u00e8s", "itemnumber": 360556}, '

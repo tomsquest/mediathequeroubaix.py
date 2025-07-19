@@ -1,6 +1,6 @@
 from returns.result import Success
 
-from mediathequeroubaix.get_loans.base64decode import base64decode
+from mediathequeroubaix.shared.base64decode import base64decode
 
 
 def test_ok() -> None:
