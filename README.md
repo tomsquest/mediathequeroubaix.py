@@ -167,6 +167,12 @@ pytest
 pre-commit run --all-files
 ```
 
+* Run the CLI
+
+```sh
+python src/mediathequeroubaix/main.py
+```
+
 ### Releasing
 
 1. Commit, tag, publish using the release script:
