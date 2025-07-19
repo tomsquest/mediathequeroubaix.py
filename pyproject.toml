@@ -1,6 +1,6 @@
 [project]
 name = "mediathequeroubaix"
-version = "1.5.0"
+version = "1.6.0"
 description = "Client for the library of Roubaix (Médiathèque Roubaix)"
 authors = [
     {name = "Thomas Queste", email = "tom@tomsquest.com"}
