@@ -3,9 +3,9 @@ import sys
 import subprocess
 
 
-def run_command(command: str, error_message: str, success_message: str) -> None:
+def run_command(command: list[str], error_message: str, success_message: str) -> None:
     try:
-        subprocess.run(command.split(), check=True, capture_output=True, text=True)
+        subprocess.run(command, check=True, capture_output=True, text=True)
         print(success_message)
     except subprocess.CalledProcessError as e:
         print(f"{error_message}: {e.stderr}")
@@ -35,22 +35,27 @@ def release():
     ensure_git_is_clean()
 
     run_command(
-        f"uv version {new_version}",
+        ["rm", "-rf", "dist"],
+        "Error removing dist directory",
+        "✅ Removed dist directory",
+    )
+    run_command(
+        ["uv", "version", new_version],
         "Error updating version in pyproject.toml",
         "✅ Updated version in pyproject.toml",
     )
     run_command(
-        "git add pyproject.toml uv.lock",
+        ["git", "add", "pyproject.toml", "uv.lock"],
         "Error adding changes",
         "✅ Updated pyproject.toml and uv.lock",
     )
     run_command(
-        f"git commit --no-verify -m chore: bump version to {new_version}",
+        ["git", "commit", "--no-verify", "-m", f"chore: bump version to {new_version}"],
         "Error committing version change",
         "✅ Committed version change",
     )
     run_command(
-        f"git tag -a {new_version} -m Release {new_version}",
+        ["git", "tag", "-a", new_version, "-m", f"Release {new_version}"],
         "Error creating git tag",
         f"✅ Created git tag: {new_version}",
     )
@@ -63,6 +68,36 @@ def release():
         ["uv", "build"],
         "Error building package",
         "✅ Built package",
+    )
+    run_command(
+        [
+            "uv",
+            "run",
+            "--isolated",
+            "--no-project",
+            "-p",
+            "3.13",
+            "--with",
+            f"dist/mediathequeroubaix-{new_version}-py3-none-any.whl",
+            "src/mediathequeroubaix/cli_test.py",
+        ],
+        "Error running smoke test (wheel)",
+        "✅ Smoke test (wheel) passed",
+    )
+    run_command(
+        [
+            "uv",
+            "run",
+            "--isolated",
+            "--no-project",
+            "-p",
+            "3.13",
+            "--with",
+            f"dist/mediathequeroubaix-{new_version}.tar.gz",
+            "src/mediathequeroubaix/cli_test.py",
+        ],
+        "Error running smoke test (source distribution)",
+        "✅ Smoke test (source distribution) passed",
     )
     run_command(
         ["uv", "publish"],
