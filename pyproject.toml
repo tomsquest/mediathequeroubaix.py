@@ -49,6 +49,9 @@ build-backend = "hatchling.build"
 include = [
     "/src",
 ]
+exclude = [
+    "*_test.py",
+]
 
 [tool.mypy]
 plugins = "pydantic.mypy"
