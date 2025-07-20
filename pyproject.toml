@@ -24,6 +24,15 @@ dependencies = [
     "typer>=0.12.5",
 ]
 
+[dependency-groups]
+dev = [
+    "mypy>=1.13.0",
+    "pre-commit>=4.0.1",
+    "pytest>=8.3.3",
+    "requests-mock>=1.12.1",
+    "types-requests>=2.32.0.20241016",
+]
+
 [project.urls]
 Changelog = "https://github.com/tomsquest/mediathequeroubaix.py/blob/master/CHANGELOG.md"
 Releases = "https://github.com/tomsquest/mediathequeroubaix.py/releases"
@@ -36,13 +45,9 @@ mediathequeroubaix = "mediathequeroubaix.main:app"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[dependency-groups]
-dev = [
-    "mypy>=1.13.0",
-    "pre-commit>=4.0.1",
-    "pytest>=8.3.3",
-    "requests-mock>=1.12.1",
-    "types-requests>=2.32.0.20241016",
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
 ]
 
 [tool.mypy]
