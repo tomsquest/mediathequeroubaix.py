@@ -17,7 +17,7 @@ repos:
       - id: trailing-whitespace
         args: [ --markdown-linebreak-ext=md ]
   - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.3
+    rev: v1.7.7
     hooks:
       - id: actionlint-docker
   - repo: https://github.com/thlorenz/doctoc
@@ -26,7 +26,7 @@ repos:
       - id: doctoc
         args: [ "--update-only", "--github", "--title", "## Table of Contents" ]
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.4.29
+    rev: 0.8.0
     hooks:
       - id: uv-lock
   - repo: local
